@@ -1,0 +1,24 @@
+#define   DEBUG_1
+#include "Make.h"
+
+
+void function_ (void* pt, WPARAM, LPARAM)
+{
+    printf ("BUTTON PRESSED\n");
+}
+
+int main ()
+{
+    ApplicationWindow app (100, 100, 800, 600, STYLE_CONST | WS_CLIPCHILDREN, L"Привет Hello", true, false);
+    DeleteObject (SelectObject (HDC (app), (HGDIOBJ)(CreateSolidBrush (RGB(0, 0, 255)))));
+    PatBlt (HDC (app), 0, 0, ScreenSize.x, ScreenSize.y, PATCOPY);
+    LPCWSTR name = L"HELLO";
+    Button b (100, 100, 200, 100, name, BS_OWNERDRAW | WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHLIKE, &app, function_, (LPVOID)100500);
+    //EditBox e (400, 400, 200, 20, L"BYE", WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHLIKE | ES_PASSWORD,
+    //                                      &app, NULL, (LPVOID)100500);
+    getch();
+    wprintf (L"Тест русских букв через wprintf\n");
+    app.Update();
+    GetConsoleWindow();
+    getch();
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="ApplicationWindow.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="5385" topLine="23" />
+	</File>
+	<File name="ApplicationWindow.h" open="1" top="0" tabpos="5">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="Button.h" open="1" top="0" tabpos="7">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="LibImport.h" open="1" top="0" tabpos="1">
+		<Cursor position="83" topLine="0" />
+	</File>
+	<File name="Make.h" open="1" top="0" tabpos="4">
+		<Cursor position="4282" topLine="18" />
+	</File>
+	<File name="MemLib.h" open="1" top="0" tabpos="9">
+		<Cursor position="2078" topLine="0" />
+	</File>
+	<File name="Win32.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="4073" topLine="0" />
+	</File>
+	<File name="WindowObject.h" open="1" top="0" tabpos="8">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="main.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="1346" topLine="0" />
+	</File>
+</CodeBlocks_layout_file>

@@ -1,0 +1,246 @@
+# depslib dependency file v1.0
+1345999048 source:c:\users\raffaele\desktop\projects\windowclass\main.cpp
+	"Make.h"
+
+1345994856 c:\users\raffaele\desktop\projects\windowclass\make.h
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<process.h>
+	<conio.h>
+	<string.h>
+	<assert.h>
+	<direct.h>
+	<stdint.h>
+	<map>
+	<locale.h>
+	"LibImport.h"
+	"WindowObject.h"
+	"ApplicationWindow.h"
+	"Win32.cpp"
+	"ApplicationWindow.cpp"
+	"Button.h"
+
+1345970479 c:\users\raffaele\desktop\projects\windowclass\class.h
+
+1345999134 c:\users\raffaele\desktop\projects\windowclass\win32.cpp
+
+1345971155 c:\users\raffaele\desktop\projects\windowclass\implementation.cpp
+
+1345973196 c:\users\raffaele\desktop\projects\windowclass\windows.h
+	<winresrc.h>
+	<stdarg.h>
+	<windef.h>
+	"WinCon.h"
+	<winbase.h>
+	<wingdi.h>
+	<winuser.h>
+	<winnls.h>
+	<winver.h>
+	<winnetwk.h>
+	<winreg.h>
+	<winsvc.h>
+	<cderr.h>
+	<dde.h>
+	<ddeml.h>
+	<dlgs.h>
+	<imm.h>
+	<lzexpand.h>
+	<mmsystem.h>
+	<nb30.h>
+	<rpc.h>
+	<shellapi.h>
+	<winperf.h>
+	<commdlg.h>
+	<winspool.h>
+	<winsock2.h>
+	<winsock.h>
+	<ole2.h>
+
+1345973543 c:\users\raffaele\desktop\projects\windowclass\wincon.h
+
+1345980643 c:\users\raffaele\desktop\projects\windowclass\libimport.h
+
+1345993479 c:\users\raffaele\desktop\projects\windowclass\applicationwindow.h
+
+1345998561 c:\users\raffaele\desktop\projects\windowclass\applicationwindow.cpp
+
+1345994829 c:\users\raffaele\desktop\projects\windowclass\windowobject.h
+
+1345997149 c:\users\raffaele\desktop\projects\windowclass\button.h
+
+1104667564 source:d:\projects\windowclass\main.cpp
+	"Make.h"
+
+1336242798 d:\projects\windowclass\make.h
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<process.h>
+	<conio.h>
+	<string.h>
+	<assert.h>
+	<direct.h>
+	<stdint.h>
+	<map>
+	<locale.h>
+	<string.h>
+	"MemLib.h"
+	"WindowObject.h"
+	"ApplicationWindow.h"
+	"Win32.cpp"
+	"ApplicationWindow.cpp"
+	"Button.h"
+	"Edit.h"
+
+1345980644 d:\projects\windowclass\libimport.h
+
+1338001296 d:\projects\windowclass\memlib.h
+	<assert.h>
+
+1336238392 d:\projects\windowclass\windowobject.h
+
+1336237152 d:\projects\windowclass\applicationwindow.h
+
+1104667016 d:\projects\windowclass\win32.cpp
+
+1104666854 d:\projects\windowclass\applicationwindow.cpp
+
+1345997150 d:\projects\windowclass\button.h
+
+1336237128 d:\projects\windowclass\edit.h
+
+1347736648 source:g:\projects\windowclass\main.cpp
+	"Make.h"
+
+1347736664 g:\projects\windowclass\make.h
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<process.h>
+	<conio.h>
+	<string.h>
+	<assert.h>
+	<direct.h>
+	<stdint.h>
+	<map>
+	<locale.h>
+	<string.h>
+	<time.h>
+	"LibImport.h"
+	"MemLib.h"
+	"WindowObject.h"
+	"ApplicationWindow.h"
+	"Win32.cpp"
+	"ApplicationWindow.cpp"
+	"Button.h"
+	"Edit.h"
+
+1338001296 g:\projects\windowclass\memlib.h
+	<assert.h>
+
+1336238392 g:\projects\windowclass\windowobject.h
+
+1336237152 g:\projects\windowclass\applicationwindow.h
+
+1347736492 g:\projects\windowclass\win32.cpp
+
+1347736064 g:\projects\windowclass\applicationwindow.cpp
+
+1347734798 g:\projects\windowclass\button.h
+
+1347733802 g:\projects\windowclass\edit.h
+
+1347736464 g:\projects\windowclass\libimport.h
+
+1347808586 source:j:\projects\windowclass\main.cpp
+	"Make.h"
+
+1347736664 j:\projects\windowclass\make.h
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<process.h>
+	<conio.h>
+	<string.h>
+	<assert.h>
+	<direct.h>
+	<stdint.h>
+	<map>
+	<locale.h>
+	<string.h>
+	<time.h>
+	"LibImport.h"
+	"MemLib.h"
+	"WindowObject.h"
+	"ApplicationWindow.h"
+	"Win32.cpp"
+	"ApplicationWindow.cpp"
+	"Button.h"
+	"Edit.h"
+
+1347736464 j:\projects\windowclass\libimport.h
+
+1338001296 j:\projects\windowclass\memlib.h
+	<assert.h>
+
+1336238392 j:\projects\windowclass\windowobject.h
+
+1336237152 j:\projects\windowclass\applicationwindow.h
+
+1347736492 j:\projects\windowclass\win32.cpp
+
+1347809264 j:\projects\windowclass\applicationwindow.cpp
+
+1347809256 j:\projects\windowclass\button.h
+
+1347809248 j:\projects\windowclass\edit.h
+
+1348076006 source:c:\users\claudio\desktop\projects\windowclass\main.cpp
+	"Make.h"
+
+1347736664 c:\users\claudio\desktop\projects\windowclass\make.h
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<process.h>
+	<conio.h>
+	<string.h>
+	<assert.h>
+	<direct.h>
+	<stdint.h>
+	<map>
+	<locale.h>
+	<string.h>
+	<time.h>
+	"LibImport.h"
+	"MemLib.h"
+	"WindowObject.h"
+	"ApplicationWindow.h"
+	"Win32.cpp"
+	"ApplicationWindow.cpp"
+	"Button.h"
+	"Edit.h"
+
+1347736464 c:\users\claudio\desktop\projects\windowclass\libimport.h
+
+1338001296 c:\users\claudio\desktop\projects\windowclass\memlib.h
+	<assert.h>
+
+1336238392 c:\users\claudio\desktop\projects\windowclass\windowobject.h
+
+1336237152 c:\users\claudio\desktop\projects\windowclass\applicationwindow.h
+
+1348165371 c:\users\claudio\desktop\projects\windowclass\win32.cpp
+
+1348075504 c:\users\claudio\desktop\projects\windowclass\applicationwindow.cpp
+
+1348075552 c:\users\claudio\desktop\projects\windowclass\button.h
+
+1348078949 c:\users\claudio\desktop\projects\windowclass\edit.h
+
