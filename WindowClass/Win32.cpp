@@ -209,7 +209,7 @@ VOID AdjustLocale ()
     SetConsoleOutputCP (1251);
     setlocale (LC_CTYPE, "Russian");
     _wsetlocale (LC_CTYPE, L"Russian");
-#if WINVER > 0x0600
+#if (WINVER > 0x0501)
     HANDLE out = GetStdHandle (STD_OUTPUT_HANDLE);
 
     CONSOLE_FONT_INFOEX info = { sizeof (info) };
