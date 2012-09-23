@@ -37,7 +37,7 @@ struct CreateRequest
     POINT pos_;
     SIZE size_;
     WindowObject* wopt_;
-    void* objectPt_;
+    
 
     CreateRequest () :
         active_    (FALSE),
@@ -56,16 +56,14 @@ struct CreateRequest
                    DWORD style,
                    POINT pos,
                    SIZE size,
-                   WindowObject* wopt,
-                   void* objPt) :
+                   WindowObject* wopt) :
         active_    (TRUE),
         exStyle_   (exStyle),
         menuName_  (menuName),
         style_     (style),
         pos_       (pos),
         size_      (size),
-        wopt_      (wopt),
-        objectPt_  (objPt)
+        wopt_      (wopt)
     {}
 
     VOID Flush ()

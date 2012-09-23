@@ -200,10 +200,10 @@
 
 1347809248 j:\projects\windowclass\edit.h
 
-1348076006 source:c:\users\claudio\desktop\projects\windowclass\main.cpp
+1348167787 source:c:\users\claudio\desktop\projects\windowclass\main.cpp
 	"Make.h"
 
-1347736664 c:\users\claudio\desktop\projects\windowclass\make.h
+1348168373 c:\users\claudio\desktop\projects\windowclass\make.h
 	<windows.h>
 	<stdio.h>
 	<stdlib.h>
@@ -227,7 +227,7 @@
 	"Button.h"
 	"Edit.h"
 
-1347736464 c:\users\claudio\desktop\projects\windowclass\libimport.h
+1348168395 c:\users\claudio\desktop\projects\windowclass\libimport.h
 
 1338001296 c:\users\claudio\desktop\projects\windowclass\memlib.h
 	<assert.h>
@@ -236,55 +236,11 @@
 
 1336237152 c:\users\claudio\desktop\projects\windowclass\applicationwindow.h
 
-1348165371 c:\users\claudio\desktop\projects\windowclass\win32.cpp
+1348168715 c:\users\claudio\desktop\projects\windowclass\win32.cpp
 
 1348075504 c:\users\claudio\desktop\projects\windowclass\applicationwindow.cpp
 
 1348075552 c:\users\claudio\desktop\projects\windowclass\button.h
 
 1348078949 c:\users\claudio\desktop\projects\windowclass\edit.h
-
-1348167787 source:c:\users\claudio\documents\github\windowclass\main.cpp
-	"Make.h"
-
-1348168373 c:\users\claudio\documents\github\windowclass\make.h
-	<windows.h>
-	<stdio.h>
-	<stdlib.h>
-	<math.h>
-	<process.h>
-	<conio.h>
-	<string.h>
-	<assert.h>
-	<direct.h>
-	<stdint.h>
-	<map>
-	<locale.h>
-	<string.h>
-	<time.h>
-	"LibImport.h"
-	"MemLib.h"
-	"WindowObject.h"
-	"ApplicationWindow.h"
-	"Win32.cpp"
-	"ApplicationWindow.cpp"
-	"Button.h"
-	"Edit.h"
-
-1348168088 c:\users\claudio\documents\github\windowclass\libimport.h
-
-1338001296 c:\users\claudio\documents\github\windowclass\memlib.h
-	<assert.h>
-
-1336238392 c:\users\claudio\documents\github\windowclass\windowobject.h
-
-1336237152 c:\users\claudio\documents\github\windowclass\applicationwindow.h
-
-1348168127 c:\users\claudio\documents\github\windowclass\win32.cpp
-
-1348075504 c:\users\claudio\documents\github\windowclass\applicationwindow.cpp
-
-1348075552 c:\users\claudio\documents\github\windowclass\button.h
-
-1348078949 c:\users\claudio\documents\github\windowclass\edit.h
 

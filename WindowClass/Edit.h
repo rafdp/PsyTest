@@ -29,22 +29,22 @@ class EditBox : public WindowObject
         height_ (height),
         name_   (name),
         awpt_   (awpt),
-        font_   (CreateFont (0,
-                             ((double)width_ / double(wcslen(name))),
+        font_   (CreateFontW (0, 11,
                               0, 0, 0, 0, 0, 0,
                               RUSSIAN_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
                               DEFAULT_QUALITY, FIXED_PITCH,
-                              _TEXT_("Lucida Console")))
+                              L"Lucida Console"))
     {
         CreateRequest cr (exStyle,
-                          name,
+                          NULL,
                           style,
                           (POINT){x_, y_},
                           (SIZE){width_, height_},
-                          (WindowObject*)this);
+                          (WindowObject*)this, (void*)this);
         awpt_->__SetRequest(cr);
         SendMessage (HWND(*awpt), WM_NULL, 0, 0);
         SendMessage(WindowObject::handle_,WM_SETFONT,(WPARAM)font_,0);
+        SendMessage(WindowObject::handle_,WM_SETTEXT,0 ,LPARAM(name));
     }
 
     VOID GetText (LPWSTR str, SIZE_T s)

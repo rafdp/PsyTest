@@ -34,9 +34,14 @@ class Button : public WindowObject
                           style,
                           (POINT){x_, y_},
                           (SIZE){width_, height_},
-                          (WindowObject*)this);
+                          (WindowObject*)this, (void*)this);
         awpt_->__SetRequest(cr);
         SendMessage (HWND(*awpt), WM_NULL, 0, 0);
+    }
+
+    operator HWND ()
+    {
+        return WindowObject::handle_;
     }
 
     ~Button ()

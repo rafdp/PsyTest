@@ -4,14 +4,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
 <body>
 <tt>
-Build started on: <u>02-01-2005 at 15:08.01</u><br />
-Build ended on: <u>02-01-2005 at 15:08.05</u><p />
+Build started on: <u>04-09-2012 at 06:37.56</u><br />
+Build ended on: <u>04-09-2012 at 06:37.59</u><p />
 <b>-------------- Build: Release in WindowClass ---------------</b><br />
 mingw32-g++.exe -std=c++0x -Wall  -O2     -c D:\Projects\WindowClass\main.cpp -o obj\Release\main.o<br />
-mingw32-g++.exe  -o bin\Release\WindowClass.exe obj\Release\main.o   -s  -lgdi32 -lgdi32 -lws2_32<br />
-Output size is 59.50 KB<br />
-<font color="#0000ff">Process terminated with status 0 (0 minutes, 4 seconds)</font><br />
-<font color="#0000ff">0 errors, 0 warnings</font><br />
+In file included from D:\Projects\WindowClass\main.cpp:3:<br />
+D:\Projects\WindowClass\RadioButtonSystem.cpp: In member function 'void RadioButtonSystem::SetCurrent(Button*)':<br />
+<font color="#0000ff">D:\Projects\WindowClass\RadioButtonSystem.cpp:25: warning: comparison between signed and unsigned integer expressions</font><br />
+<font color="#0000ff">D:\Projects\WindowClass\RadioButtonSystem.cpp:29: warning: comparison between signed and unsigned integer expressions</font><br />
+D:\Projects\WindowClass\RadioButtonSystem.cpp: In destructor 'RadioButtonSystem::~RadioButtonSystem()':<br />
+<font color="#0000ff">D:\Projects\WindowClass\RadioButtonSystem.cpp:47: warning: comparison between signed and unsigned integer expressions</font><br />
+mingw32-g++.exe  -o bin\Release\WindowClass.exe obj\Release\main.o   -s  -lgdi32 D:\Projects\WindowClass\Kernel32.Lib<br />
+Output size is 71.50 KB<br />
+<font color="#0000ff">Process terminated with status 0 (0 minutes, 3 seconds)</font><br />
+<font color="#0000ff">0 errors, 3 warnings</font><br />
 </tt>
 </body>
 </html>

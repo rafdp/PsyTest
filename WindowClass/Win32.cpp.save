@@ -178,7 +178,7 @@ LRESULT CALLBACK WindowProcedure (HWND wnd, UINT msg, WPARAM wparam, LPARAM lpar
         {
             ApplicationWindow* pt = (ApplicationWindow*) GetWindowLong (wnd, GWL_USERDATA);
             ObjectFunctionCall fc = pt->addedObjects_[LOWORD(wparam)];
-            if (fc.function) fc.function(fc.objectPt, fc.pt, wparam, lparam);
+            if (fc.function) fc.function(fc/fc.pt, wparam, lparam);
             break;
         }
 

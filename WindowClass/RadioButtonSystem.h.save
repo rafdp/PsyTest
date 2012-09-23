@@ -1,0 +1,30 @@
+#ifndef RADIOBUTTONSYSTEM_H_INCLUDED
+#define RADIOBUTTONSYSTEM_H_INCLUDED
+
+class RadioButtonSystem
+{
+    public:
+    Button** buttons_;
+    size_t buttonsN_;
+    int current_;
+
+    RadioButtonSystem () ;
+
+    RadioButtonSystem (Button** array, size_t num);
+
+    void Set (Button** array, size_t num);
+
+    void SetCurrent (Button* pt);
+
+    ~RadioButtonSystem();
+};
+
+typedef RadioButtonSystem* LPRadioButtonSystem;
+
+void RBSManagementCallback (void* obj, void* pt, WPARAM, LPARAM)
+{
+    RadioButtonSystem* rbs = (LPRadioButtonSystem) pt;
+    rbs->SetCurrent ((Button*)obj);
+}
+
+#endif // RADIOBUTTONSYSTEM_H_INCLUDED

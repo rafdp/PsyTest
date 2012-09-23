@@ -263,7 +263,7 @@ ApplicationWindow::operator HDC ()
 ///-----------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------
-/// operator HDC
+/// operator HWND
 //{
 ApplicationWindow::operator HWND ()
 {
@@ -329,7 +329,7 @@ VOID ApplicationWindow::__ActivateRequest ()
                                            NULL,
                                            NULL);
     req_.wopt_->code_ = addObjectCode_;
-    ObjectFunctionCall fc = {req_.wopt_->func_, req_.wopt_->pt_, req_.wopt_->handle_ };
+    ObjectFunctionCall fc = {req_.wopt_->func_, req_.wopt_->pt_, req_.wopt_->handle_, req_.objectPt_};
     addedObjects_[addObjectCode_] = fc;
     addObjectCode_++;
 

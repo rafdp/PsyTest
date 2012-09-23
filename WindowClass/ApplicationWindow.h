@@ -8,6 +8,7 @@ struct ObjectFunctionCall
     OBJECTFUNC function;
     void* pt;
     HWND handle;
+    void* objectPt;
 };
 
 class ApplicationWindow
