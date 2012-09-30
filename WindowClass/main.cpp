@@ -1,4 +1,4 @@
-#define   DEBUG_1
+#define   DEBUG_0
 #include "Make.h"
 
 struct StopData

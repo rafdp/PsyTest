@@ -57,6 +57,9 @@ class Page_Management
     std::vector<Question*> questions_;
     int currentY_;
 
+    std::vector<RadioButtonSystem*> not_completed_;
+    bool check_run_;
+
     public:
     Page_Management (ApplicationWindow& window, LPCWSTR filename);
     ~Page_Management ();

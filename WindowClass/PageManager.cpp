@@ -83,7 +83,9 @@ Page_Management::Page_Management (ApplicationWindow& window, LPCWSTR filename) :
     window_         (window),
     header_         (NULL),
     questions_      (),
-    currentY_       (0)
+    currentY_       (0),
+    not_completed_  (),
+    check_run_      ()
 {
     ParseFile (filename);
 }
@@ -98,10 +100,8 @@ Page_Management::~Page_Management ()
 
 bool Page_Management::CheckForCompletion ()
 {
-    static std::vector<RadioButtonSystem*> not_completed;
-    static bool run = false;
     bool ok = true;
-    if (!run)
+    if (!check_run_)
     {
         VECTOR_ITERATOR (questions_, iter)
         {
@@ -113,20 +113,20 @@ bool Page_Management::CheckForCompletion ()
                 //!if (((RadioButtonSystem*)((WindowObject*)(*iterButton)->pt))->GetCurrent () == -1)
                 if (((RadioButtonSystem*)(*(int*)(*iterButton)))->GetCurrent () == -1)
                 {
-                    not_completed.push_back ((RadioButtonSystem*)((WindowObject*)(*iterButton)->pt));
+                    not_completed_.push_back ((RadioButtonSystem*)((WindowObject*)(*iterButton)->pt));
                     ok = false;
                 }
             }
         }
+        check_run_ = true;
     }
     else
     {
-        VECTOR_ITERATOR (not_completed, iter)
+        VECTOR_ITERATOR (not_completed_, iter)
         {
-            if ((*iter)->GetCurrent () != -1) {not_completed.erase (iter); iter --;}
+            if ((*iter)->GetCurrent () != -1) {not_completed_.erase (iter); iter --;}
             else ok = false;
         }
     }
-    run = true;
     return ok;
 }

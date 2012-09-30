@@ -257,3 +257,31 @@ bool SecureElementDelete (T*& data)
 
     return true;
 }
+
+int OutputDebugPrintfA (LPCSTR format, ...)
+{
+    if (!format) return 0;
+
+    char str[2048] = "";
+
+    va_list arg; va_start (arg, format);
+    int n = _vsnprintf (str, sizeof (str) - 1, format, arg);
+    va_end (arg);
+
+    OutputDebugStringA (str);
+    return n;
+}
+
+int OutputDebugPrintfW (LPCWSTR format, ...)
+{
+    if (!format) return 0;
+
+    wchar_t str[2048] = L"";
+
+    va_list arg; va_start (arg, format);
+    int n = _vsnwprintf (str, sizeof (str) - 1, format, arg);
+    va_end (arg);
+
+    OutputDebugStringW (str);
+    return n;
+}

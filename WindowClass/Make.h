@@ -31,7 +31,7 @@
         } \
         catch (...) \
         { \
-            printf ("Exception occured:\n function \"%s\"\n file \"%s\"\n line %d\n", __PRETTY_FUNCTION__, __FILE__, __LINE__);\
+            OutputDebugPrintfA ("Exception occured:\n function \"%s\"\n file \"%s\"\n line %d\n", __PRETTY_FUNCTION__, __FILE__, __LINE__);\
             abort ();\
         }
 #ifdef NDEBUG
@@ -39,12 +39,12 @@
 { \
     if (!(expr)) \
     { \
-        TCHAR message[MAX_MESSAGE] = ""; \
+        char message[MAX_MESSAGE] = ""; \
         snprintf (message, MAX_MESSAGE, "%s:: \"%s\" returned bad result", __PRETTY_FUNCTION__, #expr); \
         MessageBoxA (NULL, \
-                    message, \
-                    APP_NAME_A, \
-                    MB_OK | MB_ICONSTOP); \
+                     message, \
+                     APP_NAME_A, \
+                     MB_OK | MB_ICONSTOP); \
         abort(); \
     } \
 }
@@ -56,19 +56,19 @@
 #elif defined (DEBUG_2)
 //{
 #define BEGIN_DEBUG \
-        printf ("%s started. Thread %u\n", \
-                __PRETTY_FUNCTION__, \
-                (unsigned int)GetCurrentThreadId ()); \
+        OutputDebugPrintfA ("%s started. Thread %u\n", \
+                            __PRETTY_FUNCTION__, \
+                            (unsigned int)GetCurrentThreadId ()); \
         try {
 
 #define END_DEBUG \
-        printf ("%s stopped. Thread %u\n", \
-                __PRETTY_FUNCTION__, \
-                (unsigned int)GetCurrentThreadId ()); \
+        OutputDebugPrintfA ("%s stopped. Thread %u\n", \
+                            __PRETTY_FUNCTION__, \
+                            (unsigned int)GetCurrentThreadId ()); \
         } \
         catch (...) \
         {\
-            printf ("Exception occured:\n function \"%s\"\n file \"%s\"\n line %d\n", __PRETTY_FUNCTION__, __FILE__, __LINE__);\
+            OutputDebugPrintfA ("Exception occured:\n function \"%s\"\n file \"%s\"\n line %d\n", __PRETTY_FUNCTION__, __FILE__, __LINE__);\
             abort ();\
         }
 
@@ -95,7 +95,7 @@
         } \
         catch (...) \
         { \
-            printf ("Exception occured:\n function \"%s\"\n file \"%s\"\n line %d\n", __FUNCTION__, __FILE__, __LINE__);\
+            OutputDebugPrintfA ("Exception occured:\n function \"%s\"\n file \"%s\"\n line %d\n", __FUNCTION__, __FILE__, __LINE__);\
             abort ();\
         }
 
@@ -209,6 +209,8 @@ LRESULT CALLBACK WindowProcedure (HWND wnd, UINT msg, WPARAM wparam, LPARAM lpar
 HDC CreateVirtualDC (int width, int height);
 VOID _DeleteDC (HDC dc);
 VOID AdjustLocale();
+int OutputDebugPrintfA (LPCSTR str, ...);
+int OutputDebugPrintfW (LPCWSTR str, ...);
 namespace on
 {
     VOID Create(HWND wnd, LPARAM& createStr);

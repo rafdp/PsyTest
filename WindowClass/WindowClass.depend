@@ -200,10 +200,10 @@
 
 1347809248 j:\projects\windowclass\edit.h
 
-1349016578 source:c:\users\claudio\desktop\projects\windowclass\main.cpp
+1349032621 source:c:\users\claudio\desktop\projects\windowclass\main.cpp
 	"Make.h"
 
-1348944504 c:\users\claudio\desktop\projects\windowclass\make.h
+1349033549 c:\users\claudio\desktop\projects\windowclass\make.h
 	<windows.h>
 	<stdio.h>
 	<stdlib.h>
@@ -231,8 +231,7 @@
 	"Edit.h"
 	"InterfaceBuilder.h"
 
-1349007942 c:\users\claudio\desktop\projects\windowclass\libimport.h
-	"Make.h"
+1349029773 c:\users\claudio\desktop\projects\windowclass\libimport.h
 
 1338001296 c:\users\claudio\desktop\projects\windowclass\memlib.h
 	<assert.h>
@@ -241,7 +240,7 @@
 
 1348944776 c:\users\claudio\desktop\projects\windowclass\applicationwindow.h
 
-1349016398 c:\users\claudio\desktop\projects\windowclass\win32.cpp
+1349030561 c:\users\claudio\desktop\projects\windowclass\win32.cpp
 
 1348944754 c:\users\claudio\desktop\projects\windowclass\applicationwindow.cpp
 
@@ -259,9 +258,9 @@
 	"PageManager.cpp"
 	"ParseFile.cpp"
 
-1349003342 c:\users\claudio\desktop\projects\windowclass\pagemanager.h
+1349030930 c:\users\claudio\desktop\projects\windowclass\pagemanager.h
 
-1348947928 c:\users\claudio\desktop\projects\windowclass\pagemanager.cpp
+1349030940 c:\users\claudio\desktop\projects\windowclass\pagemanager.cpp
 
 1349019208 c:\users\claudio\desktop\projects\windowclass\parsefile.cpp
 
