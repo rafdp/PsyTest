@@ -3,16 +3,20 @@
 
 LPCWSTR EditBoxClassName = L"EDIT";
 
+void InitEditBox (void* pt);
+
 class EditBox : public WindowObject
 {
     public:
     INT x_, y_;
     INT width_, height_;
-    LPCWSTR name_;
+    LPWSTR name_;
     ApplicationWindow* awpt_;
     HFONT font_;
 
-    EditBox (INT x,
+    EditBox (LPCWSTR font,
+             size_t size,
+             INT x,
              INT y,
              INT width,
              INT height,
@@ -22,29 +26,28 @@ class EditBox : public WindowObject
              ApplicationWindow* awpt,
              OBJECTFUNC f,
              LPVOID pt) :
-        WindowObject (NULL, f, pt, EditBoxClassName),
+        WindowObject (NULL, f, pt, EditBoxClassName, InitEditBox, EDITBOX_HEADER),
         x_ (x),
         y_ (y),
         width_ (width),
         height_ (height),
-        name_   (name),
+        name_   (name ? new wchar_t [wcslen(name) + 1] : NULL),
         awpt_   (awpt),
-        font_   (CreateFontW (0, 11,
+        font_   (CreateFontW (2*size, 0,
                               0, 0, 0, 0, 0, 0,
                               RUSSIAN_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
-                              DEFAULT_QUALITY, FIXED_PITCH,
-                              L"Lucida Console"))
+                              ANTIALIASED_QUALITY, 0,
+                              font))
     {
+        if (name_) wcscpy (name_, name);
         CreateRequest cr (exStyle,
-                          NULL,
+                          name_,
                           style,
                           (POINT){x_, y_},
                           (SIZE){width_, height_},
                           (WindowObject*)this, (void*)this);
         awpt_->__SetRequest(cr);
         SendMessage (HWND(*awpt), WM_NULL, 0, 0);
-        SendMessage(WindowObject::handle_,WM_SETFONT,(WPARAM)font_,0);
-        SendMessage(WindowObject::handle_,WM_SETTEXT,0 ,LPARAM(name));
     }
 
     VOID GetText (LPWSTR str, SIZE_T s)
@@ -62,7 +65,18 @@ class EditBox : public WindowObject
         width_ = 0;
         height_ = 0;
         name_ = NULL;
+        SecureArrayDelete (name_);
     }
 };
+
+void DeleteEditBox (void* pt)
+{
+    ((EditBox*)pt)->~EditBox();
+}
+
+void InitEditBox (void* pt)
+{
+    SendMessage(((EditBox*)pt)->WindowObject::handle_, WM_SETFONT, (WPARAM)((EditBox*)pt)->font_, TRUE);
+}
 
 #endif // EDIT_H_INCLUDED

@@ -6,23 +6,35 @@ void RBSManagementCallback (void*, void*, WPARAM, LPARAM);
 class RadioButtonSystem
 {
     private:
-    Button** buttons_;
-    size_t buttonsN_;
+    const int HEADER;
+    std::vector<Button*> buttons_;
     int current_;
+    ApplicationWindow* awpt_;
 
     public:
-    RadioButtonSystem ();
+    RadioButtonSystem (ApplicationWindow* awpt);
 
-    RadioButtonSystem (Button** array, size_t num);
-
-    void Set (Button** array, size_t num);
+    void AddButton (LPCWSTR font,
+                    size_t size,
+                    INT x,
+                    INT y,
+                    INT width,
+                    INT height,
+                    LPCWSTR name);
 
     void SetCurrent (Button* pt);
 
     ~RadioButtonSystem();
 
+    int GetCurrent ();
+
     friend void RBSManagementCallback (void*, void*, WPARAM, LPARAM);
 };
+
+void DeleteRBS (void* pt)
+{
+    ((RadioButtonSystem*)pt)->~RadioButtonSystem ();
+}
 
 typedef RadioButtonSystem* LPRadioButtonSystem;
 

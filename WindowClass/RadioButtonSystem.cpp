@@ -1,33 +1,45 @@
 
 #include "RadioButtonSystem.h"
 
-RadioButtonSystem::RadioButtonSystem () :
-    buttons_  (NULL),
-    buttonsN_ (0),
-    current_ (-1)
+RadioButtonSystem::RadioButtonSystem (ApplicationWindow* awpt) :
+    HEADER (RBS_HEADER),
+    buttons_  (),
+    current_ (-1),
+    awpt_    (awpt)
 {}
 
-RadioButtonSystem::RadioButtonSystem (Button** array, size_t num) :
-    buttons_  (array),
-    buttonsN_ (num),
-    current_ (-1)
-{}
-
-void RadioButtonSystem::Set (Button** array, size_t num)
+void RadioButtonSystem::AddButton (LPCWSTR font,
+                                   size_t size,
+                                   INT x,
+                                   INT y,
+                                   INT width,
+                                   INT height,
+                                   LPCWSTR name)
 {
-    if (buttons_ == NULL) buttons_ = array;
-    if (buttonsN_ == 0) buttonsN_ = num;
-    current_ = -1;
+    Button* pointer = new Button (font,
+                                  size,
+                                  x, y,
+                                  width, height,
+                                  name,
+                                  WS_TABSTOP |
+                                  WS_VISIBLE |
+                                  WS_CHILD |
+                                  BS_RADIOBUTTON |
+                                  BS_MULTILINE,
+                                  0,
+                                  awpt_,
+                                  RBSManagementCallback, this);
+    buttons_.push_back (pointer);
 }
 
 void RadioButtonSystem::SetCurrent (Button* pt)
 {
-    for (int i = 0; i < buttonsN_; i ++)
+    for (size_t i = 0; i < buttons_.size(); i ++)
     {
-        if (pt == buttons_[i])
+        if (pt == buttons_.at(i))
         {
-            if (current_ != -1 && current_ < buttonsN_)
-                SendMessage (HWND (*buttons_[current_]),
+            if (current_ != -1 && size_t (current_) < buttons_.size())
+                SendMessage (HWND (*buttons_.at(current_)),
                              BM_SETCHECK,
                              BST_UNCHECKED,
                              0);
@@ -44,11 +56,15 @@ void RadioButtonSystem::SetCurrent (Button* pt)
 
 RadioButtonSystem::~RadioButtonSystem()
 {
-    for (int i = 0; i < buttonsN_; i ++)
-        delete buttons_[i];
-    buttons_ = NULL;
-    buttonsN_ = 0;
+    for (size_t i = 0; i < buttons_.size(); i ++)
+        SecureElementDelete(buttons_[i]);
+    buttons_.clear();
     current_ = -1;
+}
+
+int RadioButtonSystem::GetCurrent ()
+{
+    return current_;
 }
 
 void RBSManagementCallback (void* obj, void* pt, WPARAM, LPARAM)

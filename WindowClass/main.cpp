@@ -1,62 +1,74 @@
 #define   DEBUG_1
 #include "Make.h"
 
-
-void function_ (void* pt, WPARAM, LPARAM)
+struct StopData
 {
-    const int MaxStringLen = 100;
-    wchar_t str[MaxStringLen] = L"";
-    reinterpret_cast<EditBox*> (pt) -> GetText (str, MaxStringLen);
-    wprintf (L"BUTTON PRESSED\n{\n  EditBox contains:\n  \"%s\"\n}\n", str);
+    bool* runningPt;
+    Page_Management* pagePt;
+    HWND wnd;
+};
+
+void function_ (void*, void* pt, WPARAM, LPARAM)
+{
+    if (!((StopData*)pt)->pagePt->CheckForCompletion ())
+    {
+        MessageBoxW (((StopData*)pt)->wnd,
+                     L"Заполните все ответы",
+                     L"Тест на нагрузку",
+                     MB_OK | MB_ICONEXCLAMATION);
+    }
+    else *(((StopData*)pt)->runningPt) = false;
 }
 
-void function1_ (void* pt, WPARAM, LPARAM)
+void ReadSettingsAndRun ()
 {
-    *((bool*)pt) = false;
+    AdjustLocale ();
+
+    Settings st;
+
+    if (!ReadSettingsFile (st)) exit (0);
+
+    SIZE scr = { GetSystemMetrics (SM_CXSCREEN), GetSystemMetrics (SM_CYSCREEN) };
+    ApplicationWindow app ((scr.cx - WINDOW_SIZE.x) / 2, (scr.cy - WINDOW_SIZE.y) / 2,
+                           WINDOW_SIZE.x, WINDOW_SIZE.y,
+                           STYLE_CONST | WS_CLIPCHILDREN,
+                           st.caption, true, false);
+    //DeleteObject (SelectObject (HDC (app), (HGDIOBJ)(CreateSolidBrush (WINDOW_COLOR))));
+    //PatBlt (HDC (app), 0, 0, ScreenSize.x, ScreenSize.y, PATCOPY);
+
+    volatile bool running = true;
+
+    for (int currentPage = 1; currentPage <= st.pages; currentPage++)
+    {
+        running = true;
+        LPWSTR filename = new wchar_t [MAX_PATH];
+        wsprintf (filename, L"%s%d%s",
+                  st.filenamePart1,
+                  currentPage,
+                  st.filenamePart2);
+        Page_Management p (app, filename);
+        SecureArrayDelete (filename);
+
+        StopData data = {(bool*)&running, &p, HWND (app)};
+
+        Button exit (st.buttonFont, st.buttonFontSize,
+                     WINDOW_SIZE.x/2 - 75, WINDOW_SIZE.y - 50,
+                     150, 50,
+                     (currentPage != st.pages) ? st.nextPageButton : st.doneButton,
+                     WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHLIKE | BS_MULTILINE,
+                     0,
+                     &app,
+                     function_,
+                     (LPVOID)&data);
+        while (running)
+        { if (ExitProgram) break; }
+          if (ExitProgram) break;
+    }
+
 }
 
 int WINAPI WinMain(HINSTANCE hInst,HINSTANCE hPrev,LPSTR CmdLine,int CmdShow)
 {
-    srand (time (NULL));
-    ApplicationWindow app (100, 100,
-                           300, 150,
-                           STYLE_RESIZABLE | WS_CLIPCHILDREN,
-                           L"Тест русских букв через CreateWindowExW", true, false);
-    DeleteObject (SelectObject (HDC (app), (HGDIOBJ)(CreateSolidBrush (RGB(rand () % 256, rand () % 256, rand () % 256)))));
-    PatBlt (HDC (app), 0, 0, ScreenSize.x, ScreenSize.y, PATCOPY);
-    {
-        EditBox e (10, 10,
-                   280, 50,
-                   L"Привет бла бла бла",//", меня зовут EditBox",
-                   WS_VISIBLE | WS_CHILD | ES_MULTILINE | ES_WANTRETURN | ES_AUTOHSCROLL | ES_AUTOVSCROLL,
-                   WS_EX_DLGMODALFRAME | WS_EX_STATICEDGE,
-                   &app,
-                   NULL,
-                   (LPVOID)100500);
-        Button b (10, 70,
-                  135, 50,
-                  L"А меня зовут Button",
-                  WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHLIKE | BS_MULTILINE,
-                  0,
-                  &app,
-                  function_,
-                  (LPVOID)&e);
-        getch();
-    }
-    volatile bool running = true;
-
-    Button exit (155, 70,
-                 135, 50,
-                 L"Press to Exit",
-                 WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_PUSHLIKE | BS_MULTILINE,
-                 WS_EX_STATICEDGE,
-                 &app,
-                 function1_,
-                 (LPVOID)&running);
-
-    wprintf (L"Тест русских букв через wprintf\n");
-
-    while (running);
-
+    ReadSettingsAndRun ();
     return 0;
 }

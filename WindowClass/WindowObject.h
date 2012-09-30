@@ -4,18 +4,27 @@
 class WindowObject
 {
     public:
+    const int HEADER;
     HWND handle_;
     INT code_;
     OBJECTFUNC func_;
     LPVOID pt_;
     LPCWSTR className_;
+    void (*initFunc_) (void*);
 
-    WindowObject (HWND handle, OBJECTFUNC func, void* pt, LPCWSTR className) :
+    WindowObject (HWND handle,
+                  OBJECTFUNC func,
+                  void* pt,
+                  LPCWSTR className,
+                  void (*initFunc) (void*),
+                  const int header) :
+        HEADER     (header),
         handle_    (handle),
         code_      (0),
         func_      (func),
         pt_        (pt),
-        className_ (className)
+        className_ (className),
+        initFunc_  (initFunc)
     {}
 
     virtual ~WindowObject ()
@@ -24,6 +33,7 @@ class WindowObject
         func_ = NULL;
         pt_ = NULL;
         code_ = 0;
+        initFunc_ = 0;
     }
 
 };

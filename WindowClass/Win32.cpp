@@ -41,7 +41,7 @@ VOID RegisterApplication ()
         wnd.lpfnWndProc      = (WNDPROC)WindowProcedure;
         wnd.hIcon            = LoadIcon(NULL, IDI_APPLICATION);
         wnd.hCursor          = LoadCursor(NULL, IDC_ARROW);
-        wnd.hbrBackground    = (HBRUSH)GetStockObject(GRAY_BRUSH);
+        wnd.hbrBackground    = (HBRUSH)GetStockObject(HOLLOW_BRUSH);
         wnd.lpszClassName    = APP_NAME_W;
 
         Verify (RegisterClassExW (&wnd));
@@ -111,6 +111,7 @@ namespace on
             pt->__Uninitialize();
         }
         PostQuitMessage (WM_DESTROY);
+        ExitProgram = true;
         END_DEBUG
     }
 
@@ -147,11 +148,11 @@ LRESULT CALLBACK WindowProcedure (HWND wnd, UINT msg, WPARAM wparam, LPARAM lpar
     if (msg == WM_NULL)
     {
         ApplicationWindow* pt = (ApplicationWindow*) GetWindowLong (wnd, GWL_USERDATA);
-        if (pt && pt->req_.active_)
+        if (pt && pt->req_.front().active_)
         {
             pt->__ActivateRequest();
-            pt->__RemoveRequest();
         }
+        return 0;
     }
     switch(msg)
     {
@@ -201,7 +202,6 @@ LRESULT CALLBACK WindowProcedure (HWND wnd, UINT msg, WPARAM wparam, LPARAM lpar
     return DefWindowProc(wnd, msg, wparam, lparam);
 }
 
-
 VOID AdjustLocale ()
 {
     BEGIN_DEBUG
@@ -209,7 +209,7 @@ VOID AdjustLocale ()
     SetConsoleOutputCP (1251);
     setlocale (LC_CTYPE, "Russian");
     _wsetlocale (LC_CTYPE, L"Russian");
-    /*
+
 #if (WINVER > 0x0501)
     HANDLE out = GetStdHandle (STD_OUTPUT_HANDLE);
 
@@ -221,7 +221,7 @@ VOID AdjustLocale ()
     wcsncpy (info.FaceName, L"Lucida Console", sizeof (info.FaceName) / sizeof (info.FaceName[0]));
     SetCurrentConsoleFontEx (out, false, &info);
 #endif
-*/
+
     END_DEBUG
 }
 
@@ -234,4 +234,26 @@ bool ShowConsole (bool mode)
     if (ok) ShowWindow (console, mode ? SW_SHOW : SW_HIDE);
     END_DEBUG
     return ok;
+}
+
+template <class T>
+bool SecureArrayDelete (T*& data)
+{
+    if (!data) return false;
+
+    delete [] data;
+    data = NULL;
+
+    return true;
+}
+
+template <class T>
+bool SecureElementDelete (T*& data)
+{
+    if (!data) return false;
+
+    delete data;
+    data = NULL;
+
+    return true;
 }

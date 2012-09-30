@@ -1,0 +1,9 @@
+Header "Анкета", "Monotype Corsiva", 20
+
+Question "I.  Сколько времени в среднем в день Вы тратите на выполнение домашнего задания?" 
+START
+Lines 1
+SelectFont "Calibri", 10
+QuestionFont "Monotype Corsiva", 13
+Buttons Radio, 5, "от 1 до 1,5 ч", "от 2 до 2,5 ч", "от 2,5 до 3 ч", "более 3 часов", "не делаю дз"
+END

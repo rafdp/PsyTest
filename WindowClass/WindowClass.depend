@@ -200,10 +200,10 @@
 
 1347809248 j:\projects\windowclass\edit.h
 
-1348167787 source:c:\users\claudio\desktop\projects\windowclass\main.cpp
+1349016578 source:c:\users\claudio\desktop\projects\windowclass\main.cpp
 	"Make.h"
 
-1348168373 c:\users\claudio\desktop\projects\windowclass\make.h
+1348944504 c:\users\claudio\desktop\projects\windowclass\make.h
 	<windows.h>
 	<stdio.h>
 	<stdlib.h>
@@ -215,32 +215,53 @@
 	<direct.h>
 	<stdint.h>
 	<map>
+	<vector>
 	<locale.h>
 	<string.h>
 	<time.h>
+	<queue>
+	<wctype.h>
 	"LibImport.h"
-	"MemLib.h"
 	"WindowObject.h"
 	"ApplicationWindow.h"
 	"Win32.cpp"
 	"ApplicationWindow.cpp"
 	"Button.h"
+	"RadioButtonSystem.cpp"
 	"Edit.h"
+	"InterfaceBuilder.h"
 
-1348168395 c:\users\claudio\desktop\projects\windowclass\libimport.h
+1349007942 c:\users\claudio\desktop\projects\windowclass\libimport.h
+	"Make.h"
 
 1338001296 c:\users\claudio\desktop\projects\windowclass\memlib.h
 	<assert.h>
 
-1336238392 c:\users\claudio\desktop\projects\windowclass\windowobject.h
+1348854762 c:\users\claudio\desktop\projects\windowclass\windowobject.h
 
-1336237152 c:\users\claudio\desktop\projects\windowclass\applicationwindow.h
+1348944776 c:\users\claudio\desktop\projects\windowclass\applicationwindow.h
 
-1348168715 c:\users\claudio\desktop\projects\windowclass\win32.cpp
+1349016398 c:\users\claudio\desktop\projects\windowclass\win32.cpp
 
-1348075504 c:\users\claudio\desktop\projects\windowclass\applicationwindow.cpp
+1348944754 c:\users\claudio\desktop\projects\windowclass\applicationwindow.cpp
 
-1348075552 c:\users\claudio\desktop\projects\windowclass\button.h
+1348854710 c:\users\claudio\desktop\projects\windowclass\button.h
 
-1348078949 c:\users\claudio\desktop\projects\windowclass\edit.h
+1348854728 c:\users\claudio\desktop\projects\windowclass\edit.h
+
+1348945460 c:\users\claudio\desktop\projects\windowclass\radiobuttonsystem.cpp
+	"RadioButtonSystem.h"
+
+1348945428 c:\users\claudio\desktop\projects\windowclass\radiobuttonsystem.h
+
+1348849200 c:\users\claudio\desktop\projects\windowclass\interfacebuilder.h
+	"PageManager.h"
+	"PageManager.cpp"
+	"ParseFile.cpp"
+
+1349003342 c:\users\claudio\desktop\projects\windowclass\pagemanager.h
+
+1348947928 c:\users\claudio\desktop\projects\windowclass\pagemanager.cpp
+
+1349019208 c:\users\claudio\desktop\projects\windowclass\parsefile.cpp
 

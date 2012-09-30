@@ -12,6 +12,8 @@
 #define UNICODE
 #endif
 
+#undef __STRICT_ANSI__
+
 #if   defined (DEBUG_3)
 //{
 #define BEGIN_DEBUG \
@@ -165,26 +167,33 @@
 #include <direct.h>   //! mkdir
 #include <stdint.h>   //! int types
 #include <map>
+#include <vector>
 #include <locale.h>
 #include <string.h>
 #include <time.h>
+#include <queue>
+#include <wctype.h>
 #include "LibImport.h"
-#include "MemLib.h"
 //}
 //!/////////////////////////////////////////
 
-typedef const int CINT;
-typedef void (*OBJECTFUNC) (void*, WPARAM, LPARAM);
 
 //!/////////////////////////////////////////
-//! Constants
+//! Constants, typedefs
 //{
+typedef const int CINT;
+typedef void (*OBJECTFUNC) (void*, void*, WPARAM, LPARAM);
 const DWORD STYLE_RESIZABLE = WS_OVERLAPPEDWINDOW;
 const DWORD STYLE_CONST     = WS_MINIMIZEBOX | WS_BORDER | WS_CAPTION | WS_SYSMENU;
 LPCSTR APP_NAME_A = "__window__";
 LPCWSTR APP_NAME_W = L"__window__";
 CONST POINT ScreenSize = {GetSystemMetrics (SM_CXSCREEN), GetSystemMetrics (SM_CYSCREEN)};
 CINT MAX_MESSAGE = 200;
+
+const int  BUTTON_HEADER = 0x123456;
+const int EDITBOX_HEADER = 0x234561;
+const int     RBS_HEADER = 0x345612;
+volatile bool ExitProgram = false;
 //}
 //!/////////////////////////////////////////
 
@@ -220,7 +229,9 @@ namespace on
 #include "Win32.cpp"
 #include "ApplicationWindow.cpp"
 #include "Button.h"
+#include "RadioButtonSystem.cpp"
 #include "Edit.h"
+#include "InterfaceBuilder.h"
 //}
 //!/////////////////////////////////////////
 #endif // MAKE_H_INCLUDED

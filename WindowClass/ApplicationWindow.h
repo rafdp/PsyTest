@@ -21,8 +21,10 @@ class ApplicationWindow
     SIZE             size_;
     volatile boolean running_;
     boolean          inputToConsole_;
-    CreateRequest    req_;
     INT              addObjectCode_;
+    volatile boolean registerChild_;
+
+    std::queue <CreateRequest>    req_;
 
     std::map<INT, ObjectFunctionCall> addedObjects_;
 
@@ -36,8 +38,7 @@ class ApplicationWindow
     boolean __Paint ();
     boolean __UpdateSize ();
     boolean __OnCHAR (WPARAM ch, LPARAM key);
-    VOID    __SetRequest (CONST CreateRequest& r);
-    VOID    __RemoveRequest ();
+    VOID    __SetRequest (const CreateRequest& r);
     VOID    __ActivateRequest ();
     VOID    __RemoveObject (INT code);
 
@@ -61,12 +62,14 @@ class ApplicationWindow
                        DWORD   style,
                        LPCWSTR caption,
                        boolean inputToConsole,
-                       boolean hideConsole);
+                       boolean registerChild);
     ~ApplicationWindow ();
 
     operator HDC ();
     operator HWND ();
     bool Update ();
+
+    bool RegisterObjects (bool reg = true);
 };
 
 class _BufferAutoLock

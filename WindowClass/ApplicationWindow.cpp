@@ -9,7 +9,7 @@ ApplicationWindow::ApplicationWindow (INT x,
                                       DWORD style,
                                       LPCWSTR caption,
                                       boolean inputToConsole,
-                                      boolean hideConsole) :
+                                      boolean registerChild) :
     handle_         (),
     dc_             (),
     paint_          (),
@@ -17,8 +17,9 @@ ApplicationWindow::ApplicationWindow (INT x,
     size_           (),
     running_        (),
     inputToConsole_ (inputToConsole),
-    req_            (),
     addObjectCode_  (StartObjectCode),
+    registerChild_  (registerChild),
+    req_            (),
     addedObjects_   ()
 {
     BEGIN_DEBUG
@@ -30,7 +31,6 @@ ApplicationWindow::ApplicationWindow (INT x,
     PassToThread ptt = {style, r, caption, this};
     verify_do (_beginthread  (WindowThread, 0, &ptt), return);
     while (!running_);
-    if (hideConsole) ShowWindow (GetConsoleWindow (), SW_HIDE);
     __Paint ();
     END_DEBUG
 }
@@ -43,7 +43,7 @@ ApplicationWindow::ApplicationWindow (INT x,
 ApplicationWindow::~ApplicationWindow ()
 {
     BEGIN_DEBUG
-    verify_do(running_, return);
+    if (!running_) return;
     EndPaint(handle_, &paint_);
     if (handle_) SendNotifyMessage (handle_, WM_DESTROY, 0, 100500);
     handle_ = NULL;
@@ -84,7 +84,7 @@ boolean ApplicationWindow::__Initialize ()
 VOID ApplicationWindow::__Uninitialize ()
 {
     BEGIN_DEBUG
-    verify_do(running_, return);
+    if (!running_) return;
     EndPaint(handle_, &paint_);
     handle_ = NULL;
     _BufferAutoLock lock;
@@ -191,13 +191,6 @@ boolean ApplicationWindow::__Paint ()
                 0,
                 SRCCOPY);
     }
-    if (ok)
-    {
-        for (auto iter = addedObjects_.begin(); iter != addedObjects_.end(); iter++)
-        {
-            //if (iter->second.handle) SendNotifyMessage (iter->second.handle, WM_DRAWITEM, 0, 0);
-        }
-    }
     END_DEBUG
     return ok;
 }
@@ -292,19 +285,7 @@ bool ApplicationWindow::Update ()
 VOID ApplicationWindow::__SetRequest (const CreateRequest& r)
 {
     BEGIN_DEBUG
-    req_ = r;
-    END_DEBUG
-}
-//}
-///-----------------------------------------------------------------------
-
-///-----------------------------------------------------------------------
-/// RemoveRequest
-//{
-VOID ApplicationWindow::__RemoveRequest ()
-{
-    BEGIN_DEBUG
-    req_.Flush();
+    req_.push (r);
     END_DEBUG
 }
 //}
@@ -316,23 +297,28 @@ VOID ApplicationWindow::__RemoveRequest ()
 VOID ApplicationWindow::__ActivateRequest ()
 {
     BEGIN_DEBUG
-    req_.wopt_->handle_ = CreateWindowExW (req_.exStyle_,
-                                           req_.wopt_->className_,
-                                           req_.menuName_,
-                                           req_.style_,
-                                           req_.pos_.x,
-                                           req_.pos_.y,
-                                           req_.size_.cx,
-                                           req_.size_.cy,
-                                           handle_,
-                                           (HMENU)addObjectCode_,
-                                           NULL,
-                                           NULL);
-    req_.wopt_->code_ = addObjectCode_;
-    ObjectFunctionCall fc = {req_.wopt_->func_, req_.wopt_->pt_, req_.wopt_->handle_, req_.objectPt_};
-    addedObjects_[addObjectCode_] = fc;
-    addObjectCode_++;
-
+    while (!req_.empty() && registerChild_)
+    {
+        CreateRequest* reqPt = &(req_.front());
+        reqPt->wopt_->handle_ = CreateWindowExW (reqPt->exStyle_,
+                                                 reqPt->wopt_->className_,
+                                                 reqPt->menuName_,
+                                                 reqPt->style_,
+                                                 reqPt->pos_.x,
+                                                 reqPt->pos_.y,
+                                                 reqPt->size_.cx,
+                                                 reqPt->size_.cy,
+                                                 handle_,
+                                                 (HMENU)addObjectCode_,
+                                                 NULL,
+                                                 NULL);
+        reqPt->wopt_->code_ = addObjectCode_;
+        if (reqPt->wopt_->initFunc_) reqPt->wopt_->initFunc_ (reqPt->objectPt_);
+        ObjectFunctionCall fc = {reqPt->wopt_->func_, reqPt->wopt_->pt_, reqPt->wopt_->handle_, reqPt->objectPt_};
+        addedObjects_[addObjectCode_] = fc;
+        addObjectCode_++;
+        req_.pop();
+    }
     END_DEBUG
 }
 //}
@@ -347,6 +333,20 @@ VOID ApplicationWindow::__RemoveObject (INT code)
     ObjectFunctionCall fc = {NULL, NULL, NULL};
     addedObjects_[code] = fc;
     END_DEBUG
+}
+//}
+///-----------------------------------------------------------------------
+
+///-----------------------------------------------------------------------
+/// RegisterObjects
+//{
+bool ApplicationWindow::RegisterObjects (bool reg)
+{
+    BEGIN_DEBUG
+    registerChild_ = reg;
+    if (registerChild_) SendMessage (handle_, WM_NULL, 0, 0);
+    END_DEBUG
+    return reg;
 }
 //}
 ///-----------------------------------------------------------------------

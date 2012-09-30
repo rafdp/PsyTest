@@ -1,0 +1,12 @@
+Header "Page 2", "Lucida Console", 20
+
+Question "II. —колько времени в среднем в день ¬ы тратите на дорогу до школы и обратно?" 
+START
+Lines 1
+QuestionFont "Monotype Corsiva", 13
+Buttons Radio, 5, "ћенее 30 мин", "30 мин Ц 1 час", "1 час Ц 2 часа", "2 часа Ц 3 часа", "более 3-х часов"
+SelectFont "Monotype Corsiva", 11
+StaticText "        ѕример статического текста", 1
+SelectFont "Times New Roman", 9
+InputBox 1
+END
