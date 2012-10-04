@@ -1,4 +1,4 @@
-#define   DEBUG_0
+#define   DEBUG_1
 #include "Make.h"
 
 struct StopData
@@ -6,15 +6,18 @@ struct StopData
     bool* runningPt;
     Page_Management* pagePt;
     HWND wnd;
+    LPCWSTR caption;
+    LPCWSTR message;
 };
 
 void function_ (void*, void* pt, WPARAM, LPARAM)
 {
-    if (!((StopData*)pt)->pagePt->CheckForCompletion ())
+    if (!((StopData*)pt)->pagePt->CheckForCompletion () &&
+        !GetAsyncKeyState(VK_MENU))
     {
         MessageBoxW (((StopData*)pt)->wnd,
-                     L"Заполните все ответы",
-                     L"Тест на нагрузку",
+                     ((StopData*)pt)->message,
+                     ((StopData*)pt)->caption,
                      MB_OK | MB_ICONEXCLAMATION);
     }
     else *(((StopData*)pt)->runningPt) = false;
@@ -49,7 +52,11 @@ void ReadSettingsAndRun ()
         Page_Management p (app, filename);
         SecureArrayDelete (filename);
 
-        StopData data = {(bool*)&running, &p, HWND (app)};
+        StopData data = {(bool*)&running,
+                         &p,
+                         HWND (app),
+                         st.caption,
+                         st.notCompletedMessage};
 
         Button exit (st.buttonFont, st.buttonFontSize,
                      WINDOW_SIZE.x/2 - 75, WINDOW_SIZE.y - 50,

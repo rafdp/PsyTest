@@ -211,7 +211,7 @@ VOID AdjustLocale ()
     _wsetlocale (LC_CTYPE, L"Russian");
 
 #if (WINVER > 0x0501)
-    HANDLE out = GetStdHandle (STD_OUTPUT_HANDLE);
+    /*HANDLE out = GetStdHandle (STD_OUTPUT_HANDLE);
 
     CONSOLE_FONT_INFOEX info = { sizeof (info) };
     if (!GetCurrentConsoleFontEx (out, false, &info)) return;
@@ -219,7 +219,7 @@ VOID AdjustLocale ()
     info.FontFamily = 0x36;                       // Unicode fixed-pitch
     if (!*info.FaceName) info.dwFontSize.Y += 2;  // Terminal font is too small
     wcsncpy (info.FaceName, L"Lucida Console", sizeof (info.FaceName) / sizeof (info.FaceName[0]));
-    SetCurrentConsoleFontEx (out, false, &info);
+    SetCurrentConsoleFontEx (out, false, &info);        */
 #endif
 
     END_DEBUG

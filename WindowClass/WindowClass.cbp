@@ -11,9 +11,8 @@
 				<Option output="bin\Release\WindowClass" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin\Release" />
 				<Option object_output="obj\Release\" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
-				<Option use_console_runner="0" />
 				<Compiler>
 					<Add option="-O2" />
 				</Compiler>
@@ -30,24 +29,42 @@
 			<Add library="gdi32" />
 			<Add library="..\..\..\Desktop\projects\WindowClass\Kernel32.Lib" />
 		</Linker>
-		<Unit filename="ApplicationWindow.cpp">
+		<Unit filename="src\ApplicationWindow.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="ApplicationWindow.h" />
-		<Unit filename="Button.h" />
-		<Unit filename="Edit.h" />
-		<Unit filename="LibImport.h" />
-		<Unit filename="Make.h" />
-		<Unit filename="MemLib.h" />
-		<Unit filename="Win32.cpp">
+		<Unit filename="src\ApplicationWindow.h" />
+		<Unit filename="src\Button.h" />
+		<Unit filename="src\Edit.h" />
+		<Unit filename="src\InterfaceBuilder.h" />
+		<Unit filename="src\LibImport.h" />
+		<Unit filename="src\Make.h" />
+		<Unit filename="src\MemLib.h" />
+		<Unit filename="src\Page1.cpp">
 			<Option compile="0" />
 			<Option link="0" />
 		</Unit>
-		<Unit filename="WindowObject.h" />
-		<Unit filename="main.cpp">
-			<Option weight="0" />
+		<Unit filename="src\Page1.h" />
+		<Unit filename="src\PageManager.cpp">
+			<Option compile="0" />
+			<Option link="0" />
 		</Unit>
+		<Unit filename="src\PageManager.h" />
+		<Unit filename="src\ParseFile.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src\RadioButtonSystem.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src\RadioButtonSystem.h" />
+		<Unit filename="src\Win32.cpp">
+			<Option compile="0" />
+			<Option link="0" />
+		</Unit>
+		<Unit filename="src\WindowObject.h" />
+		<Unit filename="src\main.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

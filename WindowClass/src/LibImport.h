@@ -7,7 +7,7 @@ extern "C"
 //HWND WINAPI GetConsoleWindow (VOID);
 //BOOL WINAPI AllocConsole (VOID);
 //BOOL WINAPI FreeConsole (VOID);
-
+/*
 struct CONSOLE_FONT_INFOEX
     {
     ULONG cbSize;
@@ -20,7 +20,7 @@ struct CONSOLE_FONT_INFOEX
 
 BOOL WINAPI GetCurrentConsoleFontEx (HANDLE con, BOOL maxWnd, CONSOLE_FONT_INFOEX* curFont);
 BOOL WINAPI SetCurrentConsoleFontEx (HANDLE con, BOOL maxWnd, CONSOLE_FONT_INFOEX* curFont);
-
+*/
 #ifdef __cplusplus
 }
 #endif

@@ -264,3 +264,64 @@
 
 1349019208 c:\users\claudio\desktop\projects\windowclass\parsefile.cpp
 
+1349358590 source:c:\users\claudio\documents\github\windowclass\src\main.cpp
+	"Make.h"
+
+1349033550 c:\users\claudio\documents\github\windowclass\src\make.h
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	<process.h>
+	<conio.h>
+	<string.h>
+	<assert.h>
+	<direct.h>
+	<stdint.h>
+	<map>
+	<vector>
+	<locale.h>
+	<string.h>
+	<time.h>
+	<queue>
+	<wctype.h>
+	"LibImport.h"
+	"WindowObject.h"
+	"ApplicationWindow.h"
+	"Win32.cpp"
+	"ApplicationWindow.cpp"
+	"Button.h"
+	"RadioButtonSystem.cpp"
+	"Edit.h"
+	"InterfaceBuilder.h"
+
+1348665618 c:\users\claudio\documents\github\windowclass\src\libimport.h
+
+1348854762 c:\users\claudio\documents\github\windowclass\src\windowobject.h
+
+1348944776 c:\users\claudio\documents\github\windowclass\src\applicationwindow.h
+
+1348665594 c:\users\claudio\documents\github\windowclass\src\win32.cpp
+
+1348944754 c:\users\claudio\documents\github\windowclass\src\applicationwindow.cpp
+
+1348854710 c:\users\claudio\documents\github\windowclass\src\button.h
+
+1348945460 c:\users\claudio\documents\github\windowclass\src\radiobuttonsystem.cpp
+	"RadioButtonSystem.h"
+
+1348945428 c:\users\claudio\documents\github\windowclass\src\radiobuttonsystem.h
+
+1348854728 c:\users\claudio\documents\github\windowclass\src\edit.h
+
+1348849200 c:\users\claudio\documents\github\windowclass\src\interfacebuilder.h
+	"PageManager.h"
+	"PageManager.cpp"
+	"ParseFile.cpp"
+
+1349030932 c:\users\claudio\documents\github\windowclass\src\pagemanager.h
+
+1349030942 c:\users\claudio\documents\github\windowclass\src\pagemanager.cpp
+
+1349361129 c:\users\claudio\documents\github\windowclass\src\parsefile.cpp
+

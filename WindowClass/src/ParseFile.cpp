@@ -365,6 +365,7 @@ struct Settings
     int    pages;
     LPWSTR filenamePart1;
     LPWSTR filenamePart2;
+    LPWSTR notCompletedMessage;
     LPWSTR nextPageButton;
     LPWSTR doneButton;
     LPWSTR buttonFont;
@@ -400,11 +401,12 @@ struct Settings
 
     void Print ()
     {
-        wprintf (L"%s\n%d\n%s\n%s\n%s\n%s\n%s\n%d\n",
+        wprintf (L"%s\n%d\n%s\n%s%s\n%s\n%s\n%s\n%d\n",
                  caption,
                  pages,
                  filenamePart1,
                  filenamePart2,
+                 notCompletedMessage,
                  nextPageButton,
                  doneButton,
                  buttonFont,
@@ -467,6 +469,10 @@ bool ReadSettingsFile (Settings& st)
         wcscpy (st.filenamePart2, startPt);
         line++;
     }
+
+    CHECK_FILE (settings);
+
+    READ_WORD (st.notCompletedMessage);
 
     CHECK_FILE (settings);
 

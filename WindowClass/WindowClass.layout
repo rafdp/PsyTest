@@ -1,34 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
-	<File name="ApplicationWindow.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="5494" topLine="57" />
+	<File name="src\ParseFile.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="13100" topLine="54" />
 	</File>
-	<File name="ApplicationWindow.h" open="1" top="0" tabpos="5">
-		<Cursor position="1962" topLine="0" />
-	</File>
-	<File name="Button.h" open="1" top="0" tabpos="7">
-		<Cursor position="1038" topLine="0" />
-	</File>
-	<File name="Edit.h" open="1" top="0" tabpos="9">
-		<Cursor position="2014" topLine="0" />
-	</File>
-	<File name="LibImport.h" open="1" top="0" tabpos="1">
-		<Cursor position="568" topLine="0" />
-	</File>
-	<File name="Make.h" open="1" top="1" tabpos="4">
-		<Cursor position="884" topLine="24" />
-	</File>
-	<File name="MemLib.h" open="0" top="0" tabpos="9">
-		<Cursor position="2078" topLine="0" />
-	</File>
-	<File name="Win32.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="6690" topLine="0" />
-	</File>
-	<File name="WindowObject.h" open="1" top="0" tabpos="8">
-		<Cursor position="68" topLine="0" />
-	</File>
-	<File name="main.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="36" topLine="0" />
+	<File name="src\main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="1932" topLine="45" />
 	</File>
 </CodeBlocks_layout_file>
