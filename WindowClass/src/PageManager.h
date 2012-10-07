@@ -1,17 +1,14 @@
 #ifndef PAGE1_H_INCLUDED
 #define PAGE1_H_INCLUDED
 
-const int MAX_QUESTIONS = 10;
-
-struct WindowElement
+struct UnreferencedControlHolder
 {
-    void* pt;
-    void (*deleteFunc) (void*);
+    ControlInformation* pt;
+    void (*deleteFunc) (ControlInformation*);
 
-    template <class T>
-    void Set (T* pointer, void (*func) (void*))
+    void Set (ControlInformation* pointer, void (*func) (ControlInformation*))
     {
-        pt = (void*)pointer;
+        pt = pointer;
         deleteFunc = func;
     }
 
@@ -24,11 +21,11 @@ struct WindowElement
 class Question
 {
     public:
-    LPWSTR         text_;
-    LPWSTR         font_;
-    size_t         fontsize_;
-    char           nLines_;
-    std::vector<WindowElement*> allocatedElements_;
+    MemContainer<wchar_t> text_;
+    MemContainer<wchar_t> font_;
+    size_t                fontsize_;
+    char                  nLines_;
+    std::vector<UnreferencedControlHolder*> allocatedElements_;
 
     Question ();
 
@@ -42,8 +39,8 @@ class Question
 
     Question& currentlyAllocated ();
 
-    template <class T>
-    void StoreElement (T* element, void (*func) (void*));
+    void StoreElement (ControlInformation* element,
+                       void (*func) (ControlInformation*));
 
     void FreeStuff ();
 
@@ -53,7 +50,7 @@ class Question
 class Page_Management
 {
     ApplicationWindow& window_;
-    EditBox* header_;
+    MemContainer<EditBox> header_;
     std::vector<Question*> questions_;
     int currentY_;
 
@@ -61,10 +58,10 @@ class Page_Management
     bool check_run_;
 
     public:
-    Page_Management (ApplicationWindow& window, LPCWSTR filename);
+    Page_Management (ApplicationWindow& window);
     ~Page_Management ();
 
-    void ParseFile (LPCWSTR filename);
+    bool ParseFile (LPCWSTR filename);
 
     bool CheckForCompletion ();
 };

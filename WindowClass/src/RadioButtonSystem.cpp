@@ -1,11 +1,12 @@
 
 #include "RadioButtonSystem.h"
 
-RadioButtonSystem::RadioButtonSystem (ApplicationWindow* awpt) :
+RadioButtonSystem::RadioButtonSystem (ApplicationWindow* awpt, bool toCheck) :
     HEADER (RBS_HEADER),
     buttons_  (),
     current_ (-1),
-    awpt_    (awpt)
+    awpt_    (awpt),
+    toCheck_ (toCheck)
 {}
 
 void RadioButtonSystem::AddButton (LPCWSTR font,
@@ -57,7 +58,7 @@ void RadioButtonSystem::SetCurrent (Button* pt)
 RadioButtonSystem::~RadioButtonSystem()
 {
     for (size_t i = 0; i < buttons_.size(); i ++)
-        SecureElementDelete(buttons_[i]);
+        SafeElementDelete(buttons_[i]);
     buttons_.clear();
     current_ = -1;
 }
@@ -71,4 +72,9 @@ void RBSManagementCallback (void* obj, void* pt, WPARAM, LPARAM)
 {
     RadioButtonSystem* rbs = (LPRadioButtonSystem) pt;
     rbs->SetCurrent ((Button*)obj);
+}
+
+bool RadioButtonSystem::Activated ()
+{
+    return toCheck_ ? (GetCurrent() == -1 ? false : true) : true;
 }

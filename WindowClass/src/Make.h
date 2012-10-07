@@ -49,7 +49,7 @@
     } \
 }
 #else
-#define verify_do(expr, do) assert(expr)
+#define verify_do(expr, do) assert(expr); do
 #endif
 
 //}
@@ -103,11 +103,11 @@
 { \
     if (!(expr)) \
     { \
-        CHAR message[MAX_MESSAGE] = ""; \
-        snprintf (message, MAX_MESSAGE, "%s:: \"%s\" returned bad result", __PRETTY_FUNCTION__, #expr); \
-        MessageBoxA (NULL, \
+        wchar_t message[MAX_MESSAGE] = L""; \
+        _snwprintf (message, MAX_MESSAGE, L"%s:: \"%s\" вернуло ложный результат", __PRETTY_FUNCTION__, #expr); \
+        MessageBoxW (NULL, \
                      message, \
-                     APP_NAME_A, \
+                     APP_NAME_W, \
                      MB_OK | MB_ICONSTOP); \
         do; \
     } \
@@ -126,11 +126,11 @@
 { \
     if (!(expr)) \
     { \
-        CHAR message[MAX_MESSAGE] = ""; \
-        snprintf (message, MAX_MESSAGE, "%s:: \"%s\" returned bad result", __PRETTY_FUNCTION__, #expr); \
-        MessageBoxA (NULL, \
+        wchar_t message[MAX_MESSAGE] = L""; \
+        _snwprintf (message, MAX_MESSAGE, L"%s:: \"%s\" вернуло ложный результат", __PRETTY_FUNCTION__, #expr); \
+        MessageBoxW (NULL, \
                      message, \
-                     APP_NAME_A, \
+                     APP_NAME_W, \
                      MB_OK | MB_ICONSTOP); \
         abort(); \
     } \
@@ -181,19 +181,22 @@
 //!/////////////////////////////////////////
 //! Constants, typedefs
 //{
-typedef const int CINT;
 typedef void (*OBJECTFUNC) (void*, void*, WPARAM, LPARAM);
 const DWORD STYLE_RESIZABLE = WS_OVERLAPPEDWINDOW;
 const DWORD STYLE_CONST     = WS_MINIMIZEBOX | WS_BORDER | WS_CAPTION | WS_SYSMENU;
 LPCSTR APP_NAME_A = "__window__";
 LPCWSTR APP_NAME_W = L"__window__";
 CONST POINT ScreenSize = {GetSystemMetrics (SM_CXSCREEN), GetSystemMetrics (SM_CYSCREEN)};
-CINT MAX_MESSAGE = 200;
+const int MAX_MESSAGE = 200;
+const int MAX_BUFFER = 2048;
 
 const int  BUTTON_HEADER = 0x123456;
 const int EDITBOX_HEADER = 0x234561;
 const int     RBS_HEADER = 0x345612;
 volatile bool ExitProgram = false;
+
+const bool MEMORY_ARRAY = true;
+const bool MEMORY_OBJECT = false;
 //}
 //!/////////////////////////////////////////
 
@@ -211,6 +214,12 @@ VOID _DeleteDC (HDC dc);
 VOID AdjustLocale();
 int OutputDebugPrintfA (LPCSTR str, ...);
 int OutputDebugPrintfW (LPCWSTR str, ...);
+int ErrorPrintfBoxA (HWND wnd, DWORD flags, LPCSTR format, ...);
+int ErrorPrintfBoxW (HWND wnd, DWORD flags, LPCWSTR format, ...);
+
+template <typename T>
+class MemContainer;
+
 namespace on
 {
     VOID Create(HWND wnd, LPARAM& createStr);

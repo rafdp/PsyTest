@@ -210,8 +210,8 @@ VOID AdjustLocale ()
     setlocale (LC_CTYPE, "Russian");
     _wsetlocale (LC_CTYPE, L"Russian");
 
-#if (WINVER > 0x0501)
-    /*HANDLE out = GetStdHandle (STD_OUTPUT_HANDLE);
+#ifdef ADD_CONSOLE_COMPATIBILITY
+    HANDLE out = GetStdHandle (STD_OUTPUT_HANDLE);
 
     CONSOLE_FONT_INFOEX info = { sizeof (info) };
     if (!GetCurrentConsoleFontEx (out, false, &info)) return;
@@ -219,7 +219,7 @@ VOID AdjustLocale ()
     info.FontFamily = 0x36;                       // Unicode fixed-pitch
     if (!*info.FaceName) info.dwFontSize.Y += 2;  // Terminal font is too small
     wcsncpy (info.FaceName, L"Lucida Console", sizeof (info.FaceName) / sizeof (info.FaceName[0]));
-    SetCurrentConsoleFontEx (out, false, &info);        */
+    SetCurrentConsoleFontEx (out, false, &info);
 #endif
 
     END_DEBUG
@@ -237,7 +237,7 @@ bool ShowConsole (bool mode)
 }
 
 template <class T>
-bool SecureArrayDelete (T*& data)
+bool SafeArrayDelete (T*& data)
 {
     if (!data) return false;
 
@@ -248,7 +248,7 @@ bool SecureArrayDelete (T*& data)
 }
 
 template <class T>
-bool SecureElementDelete (T*& data)
+bool SafeElementDelete (T*& data)
 {
     if (!data) return false;
 
@@ -262,7 +262,7 @@ int OutputDebugPrintfA (LPCSTR format, ...)
 {
     if (!format) return 0;
 
-    char str[2048] = "";
+    char str[MAX_BUFFER] = "";
 
     va_list arg; va_start (arg, format);
     int n = _vsnprintf (str, sizeof (str) - 1, format, arg);
@@ -276,7 +276,7 @@ int OutputDebugPrintfW (LPCWSTR format, ...)
 {
     if (!format) return 0;
 
-    wchar_t str[2048] = L"";
+    wchar_t str[MAX_BUFFER] = L"";
 
     va_list arg; va_start (arg, format);
     int n = _vsnwprintf (str, sizeof (str) - 1, format, arg);
@@ -285,3 +285,91 @@ int OutputDebugPrintfW (LPCWSTR format, ...)
     OutputDebugStringW (str);
     return n;
 }
+
+int ErrorPrintfBoxA (HWND wnd, DWORD flags, LPCSTR format, ...)
+{
+    if (!format) return 0;
+
+    char str[MAX_BUFFER] = "";
+
+    va_list arg; va_start (arg, format);
+    int n = _vsnprintf (str, sizeof (str) - 1, format, arg);
+    va_end (arg);
+
+    MessageBoxA (wnd, str, APP_NAME_A, flags);
+    return n;
+}
+
+int ErrorPrintfBoxW (HWND wnd, DWORD flags, LPCWSTR format, ...)
+{
+    if (!format) return 0;
+
+    wchar_t str[MAX_BUFFER] = L"";
+
+    va_list arg; va_start (arg, format);
+    int n = _vsnwprintf (str, sizeof (str) - 1, format, arg);
+    va_end (arg);
+
+    MessageBoxW (wnd, str, APP_NAME_W, flags);
+    return n;
+}
+
+template <typename T>
+class MemContainer
+{
+    bool deleted_;
+    bool array_;
+    bool set_;
+    public:
+    T* data;
+
+    MemContainer () :
+        deleted_ (false),
+        array_   (MEMORY_OBJECT),
+        set_     (false),
+        data     (NULL)
+    {}
+
+    MemContainer (T* setting, bool array) :
+        deleted_ (false),
+        array_ (array),
+        set_   (false),
+        data   (setting)
+    {
+        if (data) set_ = true;
+    }
+
+    void Set (T* setting, bool array)
+    {
+        if (deleted_) return;
+        if (!set_)
+        {
+            data = setting;
+            array_ = array;
+            if (data) set_ = true;
+        }
+        else
+        {
+            Delete ();
+            data = setting;
+            array_ = array;
+            if (data) set_ = true;
+            deleted_ = false;
+        }
+
+    }
+
+    void Delete ()
+    {
+        if (deleted_ || !set_) return;
+        if (array_ == MEMORY_ARRAY) SafeArrayDelete   (data);
+        if (array_ == MEMORY_OBJECT) SafeElementDelete (data);
+        deleted_ = true;
+    }
+
+    ~MemContainer ()
+    {
+        Delete();
+    }
+
+};

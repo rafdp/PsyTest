@@ -5,12 +5,12 @@ LPCWSTR ButtonClassName = L"BUTTON";
 
 void InitButton (void* pt);
 
-class Button : public WindowObject
+class Button : public WindowObject, public ControlInformation
 {
     public:
     INT x_, y_;
     INT width_, height_;
-    LPWSTR name_;
+    MemContainer<wchar_t> name_
     ApplicationWindow* awpt_;
     CreateRequest req_;
     HFONT font_;
@@ -32,7 +32,8 @@ class Button : public WindowObject
         y_      (y),
         width_  (width),
         height_ (height),
-        name_   (new wchar_t [wcslen(name) + 1]),
+        name_   (new wchar_t [wcslen(name) + 1],
+                 MEMORY_ARRAY),
         awpt_   (awpt),
         req_    (exStyle,
                  name_,
@@ -65,7 +66,12 @@ class Button : public WindowObject
         width_ = 0;
         height_ = 0;
         name_ = NULL;
-        SecureArrayDelete (name_);
+        SafeArrayDelete (name_);
+    }
+
+    virtual bool Activated ()
+    {
+        return true;
     }
 };
 
@@ -74,7 +80,7 @@ void InitButton (void* pt)
     SendMessage(((Button*)pt)->WindowObject::handle_, WM_SETFONT, (WPARAM)((Button*)pt)->font_, TRUE);
 }
 
-void DeleteButton (void* pt)
+void DeleteButton (ControlInformation* pt)
 {
     ((Button*)pt)->~Button();
 }

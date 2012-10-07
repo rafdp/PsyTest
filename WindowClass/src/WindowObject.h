@@ -1,6 +1,12 @@
 #ifndef WINDOWOBJECT_H_INCLUDED
 #define WINDOWOBJECT_H_INCLUDED
 
+class ControlInformation
+{
+public:
+    virtual bool Activated () = 0;
+};
+
 class WindowObject
 {
     public:
@@ -89,5 +95,6 @@ struct CreateRequest
         wopt_      = NULL;
     }
 };
+
 
 #endif // WINDOWOBJECT_H_INCLUDED

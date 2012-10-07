@@ -5,12 +5,12 @@ LPCWSTR EditBoxClassName = L"EDIT";
 
 void InitEditBox (void* pt);
 
-class EditBox : public WindowObject
+class EditBox : public WindowObject, public ControlInformation
 {
     public:
     INT x_, y_;
     INT width_, height_;
-    LPWSTR name_;
+    MemContainer<wchar_t> name_;
     ApplicationWindow* awpt_;
     HFONT font_;
 
@@ -31,7 +31,7 @@ class EditBox : public WindowObject
         y_ (y),
         width_ (width),
         height_ (height),
-        name_   (name ? new wchar_t [wcslen(name) + 1] : NULL),
+        name_   (name ? new wchar_t [wcslen(name) + 1] : NULL, MEMORY_ARRAY),
         awpt_   (awpt),
         font_   (CreateFontW (2*size, 0,
                               0, 0, 0, 0, 0, 0,
@@ -39,9 +39,9 @@ class EditBox : public WindowObject
                               ANTIALIASED_QUALITY, 0,
                               font))
     {
-        if (name_) wcscpy (name_, name);
+        if (name_.data) wcscpy (name_.data, name);
         CreateRequest cr (exStyle,
-                          name_,
+                          name_.data,
                           style,
                           (POINT){x_, y_},
                           (SIZE){width_, height_},
@@ -64,19 +64,22 @@ class EditBox : public WindowObject
         y_ = 0;
         width_ = 0;
         height_ = 0;
-        name_ = NULL;
-        SecureArrayDelete (name_);
+    }
+
+    virtual bool Activated ()
+    {
+        return true;
     }
 };
-
-void DeleteEditBox (void* pt)
-{
-    ((EditBox*)pt)->~EditBox();
-}
 
 void InitEditBox (void* pt)
 {
     SendMessage(((EditBox*)pt)->WindowObject::handle_, WM_SETFONT, (WPARAM)((EditBox*)pt)->font_, TRUE);
+}
+
+void DeleteEditBox (ControlInformation* pt)
+{
+    ((EditBox*)pt)->~EditBox();
 }
 
 #endif // EDIT_H_INCLUDED

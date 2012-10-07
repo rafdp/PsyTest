@@ -3,16 +3,20 @@
 
 void RBSManagementCallback (void*, void*, WPARAM, LPARAM);
 
-class RadioButtonSystem
+class RadioButtonSystem : public ControlInformation
 {
     private:
     const int HEADER;
     std::vector<Button*> buttons_;
     int current_;
     ApplicationWindow* awpt_;
+    bool toCheck_;
 
     public:
-    RadioButtonSystem (ApplicationWindow* awpt);
+
+    virtual bool Activated ();
+
+    RadioButtonSystem (ApplicationWindow* awpt, bool toCheck = true);
 
     void AddButton (LPCWSTR font,
                     size_t size,
@@ -31,7 +35,7 @@ class RadioButtonSystem
     friend void RBSManagementCallback (void*, void*, WPARAM, LPARAM);
 };
 
-void DeleteRBS (void* pt)
+void DeleteRBS (ControlInformation* pt)
 {
     ((RadioButtonSystem*)pt)->~RadioButtonSystem ();
 }
